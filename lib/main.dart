@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: "Calculadora IMC",
+    theme: ThemeData(
+      primarySwatch: Colors.green,
+    ),
     home: Home(),
   ));
 }
@@ -53,7 +56,6 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text("Calculadora de IMC"),
         centerTitle: true,
-        backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
@@ -61,7 +63,7 @@ class _HomeState extends State<Home> {
           )
         ], //<Widget>[]
       ), // app bar
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
         child: Form(
@@ -69,29 +71,35 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Icon(Icons.person, size: 120, color: Colors.red),
+              Icon(Icons.person, size: 120, color: Colors.green),
               TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     labelText: "Peso (kg)",
-                    labelStyle: TextStyle(color: Colors.red)),
+                    labelStyle: TextStyle(color: Colors.green)),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red, fontSize: 25.0),
+                style: TextStyle(color: Colors.green, fontSize: 25.0),
                 controller: pesoController,
                 validator: (value) {
-                  if (value.isEmpty) return "Insira seu peso!";
+                  if (value.isEmpty)
+                    return "Insira seu peso!";
+                  else
+                    return null;
                 },
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     labelText: "Altura (cm)",
-                    labelStyle: TextStyle(color: Colors.red)),
+                    labelStyle: TextStyle(color: Colors.green)),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red, fontSize: 25.0),
+                style: TextStyle(color: Colors.green, fontSize: 25.0),
                 controller: alturaController,
                 validator: (value) {
-                  if (value.isEmpty) return "Insira sua altura!";
+                  if (value.isEmpty)
+                    return "Insira sua altura!";
+                  else
+                    return null;
                 },
               ),
               Padding(
@@ -99,7 +107,7 @@ class _HomeState extends State<Home> {
                 child: ButtonTheme(
                     height: 50.0,
                     highlightColor: Colors.amber,
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState.validate()) _calcular();
                       },
@@ -107,13 +115,12 @@ class _HomeState extends State<Home> {
                         "Calcular",
                         style: TextStyle(color: Colors.white, fontSize: 25.0),
                       ),
-                      color: Colors.red,
                     )),
               ),
               Text(
                 _textInfo,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red, fontSize: 25.0),
+                style: TextStyle(color: Colors.green, fontSize: 25.0),
               )
             ], //<widget>[]
           ),
