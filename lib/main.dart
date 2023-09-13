@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _textInfo = "";
   void _resetCampos() {
-    _formKey.currentState.reset();
+    _formKey.currentState!.reset();
     pesoController.clear();
     alturaController.clear();
     setState(() {
@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
                 style: TextStyle(color: Colors.green, fontSize: 25.0),
                 controller: pesoController,
                 validator: (value) {
-                  if (value.isEmpty)
+                  if (value!.isEmpty)
                     return "Insira seu peso!";
                   else
                     return null;
@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
                 style: TextStyle(color: Colors.green, fontSize: 25.0),
                 controller: alturaController,
                 validator: (value) {
-                  if (value.isEmpty)
+                  if (value!.isEmpty)
                     return "Insira sua altura!";
                   else
                     return null;
@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                     highlightColor: Colors.amber,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) _calcular();
+                        if (_formKey.currentState!.validate()) _calcular();
                       },
                       child: Text(
                         "Calcular",
