@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     title: "Calculadora IMC",
-    theme: ThemeData(
-      primarySwatch: Colors.green,
-    ),
+    theme: ThemeData(primarySwatch: Colors.green, primaryColor: Colors.red),
     home: Home(),
   ));
 }
@@ -20,6 +18,7 @@ class _HomeState extends State<Home> {
   TextEditingController alturaController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _textInfo = "";
+
   void _resetCampos() {
     _formKey.currentState!.reset();
     pesoController.clear();
@@ -54,11 +53,16 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calculadora de IMC"),
+        title: Text("Calculadora de IMC",
+            style: TextStyle(color: Colors.white, fontSize: 25)),
         centerTitle: true,
+        backgroundColor: Colors.purple,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
             onPressed: _resetCampos,
           )
         ], //<Widget>[]
@@ -71,14 +75,15 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Icon(Icons.person, size: 120, color: Colors.green),
+              Icon(Icons.person, size: 120, color: Colors.purple),
               TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     labelText: "Peso (kg)",
-                    labelStyle: TextStyle(color: Colors.green)),
+                    labelStyle: TextStyle(fontSize: 30, color: Colors.purple)),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green, fontSize: 25.0),
+                style: TextStyle(
+                    color: Color.fromARGB(255, 152, 76, 175), fontSize: 25.0),
                 controller: pesoController,
                 validator: (value) {
                   if (value!.isEmpty)
@@ -91,9 +96,9 @@ class _HomeState extends State<Home> {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     labelText: "Altura (cm)",
-                    labelStyle: TextStyle(color: Colors.green)),
+                    labelStyle: TextStyle(color: Colors.purple, fontSize: 30)),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green, fontSize: 25.0),
+                style: TextStyle(color: Colors.purple, fontSize: 25.0),
                 controller: alturaController,
                 validator: (value) {
                   if (value!.isEmpty)
@@ -103,24 +108,26 @@ class _HomeState extends State<Home> {
                 },
               ),
               Padding(
-                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: ButtonTheme(
-                    height: 50.0,
-                    highlightColor: Colors.amber,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) _calcular();
-                      },
-                      child: Text(
-                        "Calcular",
-                        style: TextStyle(color: Colors.white, fontSize: 25.0),
-                      ),
-                    )),
-              ),
+                  padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) _calcular();
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        textStyle: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      "Calcular",
+                      style: TextStyle(color: Colors.white, fontSize: 25.0),
+                    ),
+                  )),
               Text(
                 _textInfo,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.green, fontSize: 25.0),
+                style: TextStyle(color: Colors.purple, fontSize: 25.0),
               )
             ], //<widget>[]
           ),
